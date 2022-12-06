@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", function() {
             firstName.validity.valid = true;
             firstName.classList.remove("invalid");
             allValid = true;
+            console.log(`good first name`);
         }
 
         // check that lastName is greater than length 3
@@ -33,14 +34,17 @@ document.addEventListener("DOMContentLoaded", function() {
             lastName.validity.valid = true;
             lastName.classList.remove("invalid");
             allValid = true;
+            console.log(`good last name`);
         }
 
         // check email regex
         let emailRegex = new RegExp('/\w+@\w+\.\w+/');
-        if(email = emailRegex.test(email.value)) {
+        let emailRegexResult = email = emailRegex.test(email.value);
+        if(emailRegexResult) {
             email.validity.valid = true;
             email.classList.remove("invalid");
             allValid = true;
+            console.log(`good email`);
         }
         else {
             email.validity.valid = false;
@@ -55,7 +59,9 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    form.addEventListener('input', (e) => {
+    form.addEventListener('submit', (e) => {
+        // e.preventDefault();
         checkValidation(e);
+        
     });
 });
