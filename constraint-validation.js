@@ -22,12 +22,40 @@ document.addEventListener("DOMContentLoaded", function() {
             allValid = true;
         }
 
+        // check that lastName is greater than length 3
+        if(lastName.value.length < 3) {
+            lastName.validity.valid = false;
+            lastName.classList.add("invalid");
+            lastName.setCustomValidity("Name is too short, needs to be at least 3 characters");
+            lastName.reportValidity();
+        }
+        else {
+            lastName.validity.valid = true;
+            lastName.classList.remove("invalid");
+            allValid = true;
+        }
+
+        // check email regex
+        let emailRegex = new RegExp('/\w+@\w+\.\w+/');
+        if(email = emailRegex.test(email.value)) {
+            email.validity.valid = true;
+            email.classList.remove("invalid");
+            allValid = true;
+        }
+        else {
+            email.validity.valid = false;
+            email.classList.add("invalid");
+            email.setCustomValidity("Email is not formatted properly");
+            email.reportValidity();
+        }
+
         if(!allValid) {
             e.preventDefault();
+            console.log(`Bad Input`);
         }
     }
 
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('input', (e) => {
         checkValidation(e);
     });
 });
